@@ -53,15 +53,10 @@ public class Building {
   public void bugsMove(){
     ArrayList<Bug> toRemove = new ArrayList<Bug>(0);
     for(Bug bug: bugs){
-      System.out.println(bug.getCurrentFloor() + " " + bug.getCurrentSteps());
       bug.move();
-      System.out.println(bug.getCurrentFloor() + " " + bug.getCurrentSteps());
       if(bug.getCurrentFloor() == topFloor){
-        System.out.println(constructionPoints);
         int damage = bug.getDamage();
-        System.out.println(damage);
         constructionPoints = constructionPoints - damage;
-        System.out.println(constructionPoints);
         toRemove.add(bug);
       }
       if(constructionPoints <= 0){
