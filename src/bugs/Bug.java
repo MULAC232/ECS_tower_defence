@@ -79,4 +79,7 @@ public abstract class Bug implements Comparable<Bug>{
     }
   }
   public abstract int getDamage();
+  public void takeDamage(int damage){
+    currentHp = currentHp - damage;
+  }
 }
