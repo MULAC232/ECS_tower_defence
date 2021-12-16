@@ -28,11 +28,10 @@ public class Team {
     int length = students.size();
     for(int i=0; i<length; i++){
       Student student = students.get(i);
-      Student.setBuilding(building);
     }
     for(int i=0; i<length; i++){
       Student student = students.get(i);
-      points = student.defence();
+      points = student.defence(building);
       this.points = this.points + points;
     }
   }
@@ -47,31 +46,31 @@ public class Team {
       Random rand = new Random();
       int choice = rand.nextInt(4);
       if(choice == 0){
-        Student student = new AiStudent(1);
+        AiStudent student = new AiStudent(1);
         students.add(student);
       }
       else if(choice == 1){
-        Student student = new CsStudent(1);
+        CsStudent student = new CsStudent(1);
         students.add(student);
       }
       else if(choice == 2){
-        Student student = new CyberStudent(1);
+        CyberStudent student = new CyberStudent(1);
         students.add(student);
       }
       else{
-        Student student = new SeStudent(1);
+        SeStudent student = new SeStudent(1);
         students.add(student);
       }
       points = points - cost;
     }
   }
   public void upgrade(Student student) throws Exception{
-    if(points < Student.upgradeCost()){
+    if(points < student.upgradeCost()){
       throw new Exception("not enough knowledge points");
     }
     else{
-      Student.incrLevel();
-      points = points - Student.upgradeCost();
+      student.incrLevel();
+      points = points - student.upgradeCost();
     }
   }
 }

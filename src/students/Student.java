@@ -5,25 +5,28 @@ import bugs.Bug;
 import static java.lang.Math.round;
 
 public interface Student {
-  public static int getLevel(){
-    return level;
+  default int getLevel(){
+    System.out.println("Error. Wrong method called.");
+    return 0;
   }
-  public static int upgradeCost(){
-    int cost = 100 * (2^level);
+  default int upgradeCost(){
+    int level = getLevel();
+    int cost = (int) (100 * (Math.pow(2, level)));
     return cost;
   }
-  public default int defence(){
+  default int defence(Building building){
     int points;
+    int currentDelay = getDelay();
     if(currentDelay == 0){
-      points = StudentSpecial.specialAttack();
+      points = specialAttack(building);
       resetDelay();
     }
     else{
-      points = normalAttack();
+      points = normalAttack(building);
     }
     return points;
   }
-  public static int normalAttack(){
+  default int normalAttack(Building building){
     int points = 0;
     int damage = getDamage();
     Bug[] bugs = building.getAllBugs();
@@ -34,20 +37,19 @@ public interface Student {
     }
     return points;
   }
-  public static int getDamage(){
-    int damage = (int) round(baseAtk * (Math.pow(level,1.2)));
-    return damage;
+  int getDamage();
+  default void resetDelay(){
+    System.out.println("Error. Wrong method called.");
   }
-
-  public static void resetDelay(){
-    int num = delay - 1;
-    currentDelay = num;
+  default void incrLevel(){
+    System.out.println("Error. Wrong method called.");
   }
-
-  public static void setBuilding(Building building2){
-    building = building2;
+  default int getDelay(){
+    System.out.println("Error. Wrong method called.");
+    return 0;
   }
-  public static void incrLevel(){
-    level++;
+  default int specialAttack(Building building){
+    System.out.println("Error. Wrong method called.");
+    return 0;
   }
 }

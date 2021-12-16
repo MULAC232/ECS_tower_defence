@@ -3,18 +3,19 @@ import building.Building;
 import bugs.Bug;
 import java.lang.Math;
 
-public class AiStudent extends StudentSpecial implements Student{
+public class AiStudent implements AiInterface{
+  int currentDelay;
+  int level;
+  Building building;
   public AiStudent(int level){
-    super(level);
-    delay = 7;
+    this.level = level;
     currentDelay = 6;
-    baseAtk = 7;
-
+    building = null;
   }
-  public static int specialAttack() {
+  public int specialAttack(Building building) {
     int points = 0;
     Bug[] bugs = building.getAllBugs();
-    int damage = Student.getDamage();
+    int damage = getDamage();
     for(int i=0; i<3; i++){
       Bug bug = bugs[i];
       bug.takeDamage(damage);
@@ -23,5 +24,17 @@ public class AiStudent extends StudentSpecial implements Student{
       }
     }
     return points;
+  }
+  public void resetDelay(){
+    currentDelay = delay - 1;
+  }
+  public int getLevel(){
+    return level;
+  }
+  public int getDelay(){
+    return currentDelay;
+  }
+  public void incrLevel(){
+    level++;
   }
 }

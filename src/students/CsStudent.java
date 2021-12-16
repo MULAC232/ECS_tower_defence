@@ -3,16 +3,18 @@ package students;
 import bugs.Bug;
 import building.Building;
 
-public final class CsStudent extends StudentSpecial implements Student{
+public final class CsStudent implements CsInterface{
+  int currentDelay;
+  int level;
+  Building building;
   public CsStudent(int level){
-    super(level);
-    delay = 6;
+    this.level = level;
     currentDelay = 5;
-    baseAtk = 6;
+    building = null;
   }
-  public static int specialAttack(){
+  public int specialAttack(Building building){
     int points = 0;
-    int damage = Student.getDamage();
+    int damage = getDamage();
     damage = damage * 4;
     Bug[] bugs = building.getAllBugs();
     Bug bug = bugs[0];
@@ -21,5 +23,17 @@ public final class CsStudent extends StudentSpecial implements Student{
       points = bug.getLevel() * 20;
     }
     return points;
+  }
+  public void resetDelay(){
+    currentDelay = delay - 1;
+  }
+  public int getLevel(){
+    return level;
+  }
+  public int getDelay(){
+    return currentDelay;
+  }
+  public void incrLevel(){
+    level++;
   }
 }
