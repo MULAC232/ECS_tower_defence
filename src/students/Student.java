@@ -14,7 +14,7 @@ public interface Student {
     int cost = (int) (100 * (Math.pow(2, level)));
     return cost;
   }
-  default int defence(Building building){
+  public default int defence(Building building){
     int points;
     int currentDelay = getDelay();
     if(currentDelay == 0){
@@ -28,12 +28,16 @@ public interface Student {
   }
   default int normalAttack(Building building){
     int points = 0;
-    int damage = getDamage();
-    Bug[] bugs = building.getAllBugs();
-    Bug bug = bugs[0];
-    bug.takeDamage(damage);
-    if(bug.getCurrentHp() == 0){
-      points = bug.getLevel() * 20;
+    try {
+      int damage = getDamage();
+      Bug[] bugs = building.getAllBugs();
+      Bug bug = bugs[0];
+      bug.takeDamage(damage);
+      if (bug.getCurrentHp() == 0) {
+        points = bug.getLevel() * 20;
+      }
+    }catch(Exception e){
+      System.out.println("no bugs left to kill");
     }
     return points;
   }
